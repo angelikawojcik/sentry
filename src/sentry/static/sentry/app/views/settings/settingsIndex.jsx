@@ -10,7 +10,6 @@ import ConfigStore from 'app/stores/configStore';
 import ExternalLink from 'app/components/externalLink';
 import InlineSvg from 'app/components/inlineSvg';
 import Link from 'app/components/link';
-import LoadingIndicator from 'app/components/loadingIndicator';
 import {Panel, PanelBody, PanelHeader} from 'app/components/panels';
 import overflowEllipsis from 'app/styles/overflowEllipsis';
 import SentryTypes from 'app/sentryTypes';
@@ -96,48 +95,49 @@ class SettingsIndex extends React.Component {
               </Panel>
             </Box>
 
-            <Box w={1 / 3} px={2}>
-              {/* if admin */}
-              <Panel>
-                {!organization && <LoadingIndicator overlay />}
-                <HomePanelHeader>
-                  <HomeLinkIcon to={organizationSettingsUrl}>
-                    {organization ? (
-                      <AvatarContainer>
-                        <Avatar organization={organization} size={HOME_ICON_SIZE} />
-                      </AvatarContainer>
-                    ) : (
-                      <HomeIcon color="green">
-                        <InlineSvg src="icon-stack" size="44px" />
-                      </HomeIcon>
-                    )}
-                    <OrganizationName css={{lineHeight: '1.1em'}}>
-                      {organization ? organization.slug : t('Organization')}
-                    </OrganizationName>
-                  </HomeLinkIcon>
-                </HomePanelHeader>
-                <HomePanelBody>
-                  <h3>{t('Quick links')}:</h3>
-                  <ul>
-                    <li>
-                      <HomeLink to={`${organizationSettingsUrl}projects/`}>
-                        {t('Projects')}
-                      </HomeLink>
-                    </li>
-                    <li>
-                      <HomeLink to={`${organizationSettingsUrl}teams/`}>
-                        {t('Teams')}
-                      </HomeLink>
-                    </li>
-                    <li>
-                      <HomeLink to={`${organizationSettingsUrl}members/`}>
-                        {t('Members')}
-                      </HomeLink>
-                    </li>
-                  </ul>
-                </HomePanelBody>
-              </Panel>
-            </Box>
+            {organization && (
+              <Box w={1 / 3} px={2}>
+                {/* if admin */}
+                <Panel>
+                  <HomePanelHeader>
+                    <HomeLinkIcon to={organizationSettingsUrl}>
+                      {organization ? (
+                        <AvatarContainer>
+                          <Avatar organization={organization} size={HOME_ICON_SIZE} />
+                        </AvatarContainer>
+                      ) : (
+                        <HomeIcon color="green">
+                          <InlineSvg src="icon-stack" size="44px" />
+                        </HomeIcon>
+                      )}
+                      <OrganizationName css={{lineHeight: '1.1em'}}>
+                        {organization ? organization.slug : t('Organization')}
+                      </OrganizationName>
+                    </HomeLinkIcon>
+                  </HomePanelHeader>
+                  <HomePanelBody>
+                    <h3>{t('Quick links')}:</h3>
+                    <ul>
+                      <li>
+                        <HomeLink to={`${organizationSettingsUrl}projects/`}>
+                          {t('Projects')}
+                        </HomeLink>
+                      </li>
+                      <li>
+                        <HomeLink to={`${organizationSettingsUrl}teams/`}>
+                          {t('Teams')}
+                        </HomeLink>
+                      </li>
+                      <li>
+                        <HomeLink to={`${organizationSettingsUrl}members/`}>
+                          {t('Members')}
+                        </HomeLink>
+                      </li>
+                    </ul>
+                  </HomePanelBody>
+                </Panel>
+              </Box>
+            )}
 
             <Box w={1 / 3} px={2}>
               <Panel>

@@ -10,10 +10,9 @@ describe('SettingsIndex', function() {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('has loading when there is no organization', function() {
+  it('does not render org section when there is no organization', function() {
     let wrapper = shallow(<SettingsIndex organization={null} />);
-
-    expect(wrapper.find('LoadingIndicator')).toHaveLength(1);
+    expect(wrapper.find('OrganizationName')).toHaveLength(0);
   });
 
   it('has different links for on premise users', function() {
